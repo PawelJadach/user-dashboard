@@ -30,7 +30,7 @@ const UsersTable = () => {
     return (
         <>
             {users.length > 0
-                ? <Table striped>
+                ? <Table responsive striped>
                     <thead>
                         <tr>
                             <th>ID</th>
