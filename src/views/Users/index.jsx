@@ -1,25 +1,32 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import PageTitle from '../../components/PageTitle';
-import { useDispatch } from 'react-redux';
-import { getUsers } from '../../features/users/usersSlice';
+import React from "react";
 
-const propTypes = {
-    props: PropTypes.object,
-};
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { withUsers } from "../../hoc/withUsers";
+
+import UsersTable from "../../features/users/UsersTable";
+import Card from "../../components/Card";
 
 const UsersPage = () => {
-    const dispatch = useDispatch();
+    const history = useHistory();
 
-    useEffect(() => {
-        dispatch(getUsers());
-    }, [dispatch]);
+    const error = useSelector(state => state.users.error);
+
+    const handleAdd = () => {
+        history.push("/add");
+    };
 
     return (
-        <PageTitle title='User table' />
+        <div>
+            {error ? (
+                <code>Error occure {error}</code>
+            ) : (
+                <Card title="Users" button={{ text: "Add new", action: handleAdd }}>
+                    <UsersTable />
+                </Card>
+            )}
+        </div>
     );
 };
 
-UsersPage.propTypes = propTypes;
-
-export default UsersPage;
+export default withUsers(UsersPage);

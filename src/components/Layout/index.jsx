@@ -1,14 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import styles from './index.module.scss';
+import styles from "./index.module.scss";
 
 const propTypes = {
     props: PropTypes.object,
 };
 
 const Layout = ({ children }) => {
-    return <div className={styles.container}>{children}</div>;
+    return <div className={styles.container}>
+        <h3>Dashboard</h3>
+        {children}
+    </div>;
 };
 
 Layout.propTypes = propTypes;
